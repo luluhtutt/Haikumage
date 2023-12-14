@@ -45,14 +45,10 @@ def img2word(filename, kosmos_model, kosmos_processor):
     )
     generated_text = kosmos_processor.batch_decode(generated_ids, skip_special_tokens=True)[0]
 
-    # Specify `cleanup_and_extract=False` in order to see the raw model generation.
-    processed_text = kosmos_processor.post_process_generation(generated_text, cleanup_and_extract=False)
-
-    # print(processed_text)
-    # `<grounding> An image of<phrase> a snowman</phrase><object><patch_index_0044><patch_index_0863></object> warming himself by<phrase> a fire</phrase><object><patch_index_0005><patch_index_0911></object>.`
-
     # By default, the generated  text is cleanup and the entities are extracted.
     processed_text, entities = kosmos_processor.post_process_generation(generated_text)
+    # entities: list of tuples
+    # [('a snowman', (12, 21), [(0.390625, 0.046875, 0.984375, 0.828125)]), ('a fire', (41, 47), [(0.171875, 0.015625, 0.484375, 0.890625)])]
 
     kosmos_output = entities[0][0]
     return kosmos_output
