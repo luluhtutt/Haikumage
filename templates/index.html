@@ -1,0 +1,62 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haikumage</title>
+
+    <style>
+        img {
+            height: auto;
+            max-height: 400px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Haikumage</h1>
+    <h2>Upload an image and get a haiku!</h2>
+
+    <form action="/" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".png, .jpg, .jpeg, .gif" required>
+        <button type="submit">Upload</button>
+    </form>
+
+    {% if filename %}
+    <h2>Uploaded Image:</h2>
+    <img src="{{ url_for('uploaded_file', filename=filename) }}" alt="Uploaded Image">
+
+    {% if generated_text %}
+    <h2>Haiku:</h2>
+    <p>{{ generated_text }}</p>
+    {% endif %}
+    {% endif %}
+</body>
+
+</html>
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Dog vs Cat</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+</head>
+
+<body>
+    <h3> Prediction: {{ pred }} </h3>
+    <br><br>
+    <img src={{imgpath}}>
+    <script>
+
+    </script>
+
+</body>
+
+</html> -->
